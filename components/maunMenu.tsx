@@ -1,6 +1,10 @@
 import React, {useState} from 'react';
-import {StyleSheet, Button, View, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import {RootStackParamList} from './screens/RootStackPrams';
 
+type myStackScreen = NativeStackNavigationProp<RootStackParamList, 'Signup'>;
 interface PropsObject {
     name: number;
 }
@@ -8,9 +12,10 @@ interface PropsObject {
 
 const MainMenu = (props: PropsObject) => {
    const [count, setCount] = useState(props.name);
-
-    function buttonClick() {
-        setCount(count +1)
+   
+    const navigation = useNavigation<myStackScreen>();
+    function signupClick() {
+        navigation.navigate('Signup');
     }
 
     function buttonClick2() {
@@ -20,7 +25,7 @@ const MainMenu = (props: PropsObject) => {
         <View style={styles.container}>
             <TouchableOpacity 
             style={styles.buttonStyle}
-            onPress={buttonClick}
+            onPress={signupClick}
             >
             <Text style={styles.displayText} >SignUp</Text>
             </TouchableOpacity>
